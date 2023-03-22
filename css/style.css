@@ -1,0 +1,251 @@
+html {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+
+}
+
+*,
+*::after,
+*::before {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-black);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --color-blue: #e7f0f3b0;
+  --color-pink: #fee6e3;
+}
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.container {
+  width: 100vw;
+  max-width: 1900px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.title {
+  margin-left: 20px;
+  font-family: Inter, sans-serif;
+  font-style: normal;
+}
+
+.container__left {
+  width: 30%;
+}
+
+.form__input {
+  margin-bottom: 15px;
+  padding: 5px 20px;
+  background-color: var(--color-blue);
+
+}
+
+.form__btn {
+  align-items: center;
+  background-color: var(--color-pink);
+  border: 2px solid #111;
+  border-radius: 8px;
+  color: #111;
+  cursor: pointer;
+  display: flex;
+  font-size: 16px;
+  height: 48px;
+  justify-content: center;
+  line-height: 24px;
+  max-width: 100%;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.form__btn:after {
+  background-color: #111;
+  border-radius: 8px;
+  content: "";
+  display: block;
+  height: 48px;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  top: -2px;
+  transform: translate(8px, 8px);
+  transition: transform .2s ease-out;
+  z-index: -1;
+}
+
+.form__btn:hover:after {
+  transform: translate(0, 0);
+}
+
+.form__btn:active {
+  background-color: #ffdeda;
+  outline: 0;
+}
+
+.form__btn:hover {
+  outline: 0;
+}
+
+.container__right {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  width: 12%;
+  margin-right: 20px;
+  padding-top: 20px;
+}
+
+.filter__title {
+  margin-bottom: 12px;
+  margin-left: 10px;
+}
+
+.table {
+  width: 80%;
+  font-size: 0;
+}
+
+.sorting__btn {
+  background-color: #798d9c;
+  border-bottom: 1px solid #7aa7c7;
+  box-shadow: rgba(255, 255, 255, .7) 0 1px 0 0 inset;
+  color: #f5e1e1;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", "Liberation Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.15385;
+  margin: 0;
+  outline: none;
+  padding: 8px .8em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+  border: none;
+}
+
+.sorting__btn:hover,
+.sorting__btn:focus {
+  background-color: #000000b3;
+  color: #ffffff;
+}
+
+.sorting__btn:focus {
+  box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+}
+
+.sorting__btn:active {
+  background-color: #a0c7e4;
+  box-shadow: none;
+  color: #2c5777;
+}
+
+.table__sort__data {
+  width: 100%;
+}
+
+.sorting__btn-1 {
+  width: 50%;
+}
+
+.sorting__btn-2 {
+  width: 10%;
+}
+
+.sorting__btn-3 {
+  width: 20%;
+}
+
+.sorting__btn-4 {
+  width: 20%;
+}
+
+.filter__btn {
+  margin-bottom: 10px;
+  border-radius: 20px;
+  align-items: center;
+  background-color: #fff;
+  border: 2px solid #000;
+  color: #000;
+  cursor: pointer;
+  display: inline-flex;
+  fill: #000;
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  height: 35px;
+  justify-content: center;
+  line-height: 14px;
+  max-width: 156px;
+  width: 80%;
+  outline: 0;
+  padding: 0 12px;
+  text-align: center;
+  text-decoration: none;
+  transition: all .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.filter__btn:focus {
+  color: #171e29;
+}
+
+.filter__btn:hover {
+  border-color: var(--color-pink);
+  color: var(--color-pink);
+  fill: var(--color-pink);
+}
+
+.filter__btn:active {
+  border-color: var(--color-pink);
+  color: var(--color-pink);
+  fill: var(--color-pink);
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Students list</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="main.js"></script>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="container__left">
+      <h1 class="title">NEW STUDENT</h1>
+      <form action="" name="ddd" class="form" id="form">
+        <input placeholder="NAME" type="text" class="form__input" name="st-name" id="st-name">
+        <input placeholder="SURNAME" type="text" class="form__input" name="st-surname" id="st-surname">
+        <input placeholder="FACULTY" type="text" class="form__input" name="st-faculty" id="st-faculty">
+        <input placeholder="DOB" type="date" class="form__input" name="st-dob" id="st-dob">
+        <input placeholder="START STUDY" type="date" class="form__input" name="st-stady" id="st-stady">
+        <button class="form__btn" type="submit" id="form__btn">ADD STUDENT</button>
+      </form>
+    </div>
+    <div class="container__right">
+      <nav class="nav">
+        <h3 class="filter__title">FILTER BY</h3>
+        <button class="filter__btn" id="filter-name">BY NAME</button>
+        <button class="filter__btn" id="filter-faculty">FACULTY</button>
+        <button class="filter__btn" id="filter-start-ed">START EDUC</button>
+        <button class="filter__btn" id="filter-finish-ed">FINISH EDUC</button>
+      </nav>
+      <ul class="table" id="table">
+        <li class="table__sort__data">
+          <button class="sorting__btn sorting__btn-1" id="sorting-name">NAME</button>
+          <button class="sorting__btn sorting__btn-2" id="sorting-birth">AGE</button>
+          <button class="sorting__btn sorting__btn-3" id="sorting-faculty">FACULTY</button>
+          <button class="sorting__btn sorting__btn-4" id="sorting-start-ed">START EDUC</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- Этап 1. Создайте верстку элементов, которые будут статичны (неизменны).  -->
+</body>
+
+</html>
