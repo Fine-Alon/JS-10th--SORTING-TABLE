@@ -108,16 +108,16 @@ ul {
   z-index: -1;
 }
 
-.form__btn:hover:after {
+.form__btn:active:after {
   transform: translate(0, 0);
 }
 
-.form__btn:active {
+.form__btn:hover {
   background-color: #ffdeda;
   outline: 0;
 }
 
-.form__btn:hover {
+.form__btn:active {
   outline: 0;
 }
 
@@ -240,7 +240,7 @@ ul {
 
 .filter__btn:hover {
   border-color: var(--color-pink);
-  color: var(--color-pink);
+  /* color: var(--color-pink); */
   fill: var(--color-pink);
 }
 
