@@ -8,9 +8,7 @@ const studentsList = [
 ]
 
 function renderTable(arrStudents) {
-
-
-
+  
 
 }
 
@@ -25,7 +23,5 @@ document.getElementById('form').addEventListener('submit', (event) => {
   $objStudents.facult = (document.getElementById('st-faculty')).value
 
   console.log($objStudents);
-  return {
-    $objStudents
-  }
+
 })
