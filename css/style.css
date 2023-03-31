@@ -249,3 +249,22 @@ ul {
   color: var(--color-pink);
   fill: var(--color-pink);
 }
+
+.table li{
+    width: 100%;
+}
+
+.table-li {
+    background-color: coral;
+    display: flex;
+    width: 100%;
+    font-family: -apple-system, system-ui, "Segoe UI", "Liberation Sans", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.table-li span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

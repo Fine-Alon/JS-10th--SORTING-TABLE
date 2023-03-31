@@ -1,27 +1,63 @@
+import Student from "./student.js";
+let $table = document.getElementById('table')
+
+
 const studentsList = [
-  { name: 'Alexandr', surname: 'Dudukalo', birth: new Date('March 30, 1994'), study: 2011, facult: 'curator' },
-  { name: 'Alon', surname: 'Fine', birth: new Date('June 20, 1997'), study: 2019, facult: 'fullstack' },
-  { name: 'Judit', surname: 'Fine', birth: new Date('September 10, 2005'), study: 2023, facult: 'rocketsince' },
-  { name: 'Ron', surname: 'Green', birth: new Date('January 20, 1992'), study: 2022, facult: 'iosdev' },
-  { name: 'Glen', surname: 'Stark', birth: new Date('November 20, 1991'), study: 2015, facult: 'disainer' },
-  { name: 'Rick', surname: 'Briens', birth: new Date('July 20, 1987'), study: 2010, facult: 'androiddev' },
+    new Student('Michail', 'Babojko', new Date('1994,04,02'), 2010, 'godofprogramming'),
+    new Student('Alexandr', 'Dudukalo', new Date('March 30, 1994'), 2011, 'curator'),
+    new Student('Alon', 'Fine', new Date('June 20, 1997'), 2019, 'fullstack'),
+    new Student('Judit', 'Fine', new Date('September 10, 2005'), 2023, 'rocketsince'),
+    new Student('Ron', 'Green', new Date('January 20, 1992'), 2022, 'iosdev'),
+    new Student('Glen', 'Stark', new Date('November 20, 1991'), 2015, 'disainer'),
+    new Student('Rick', 'Briens', new Date('July 20, 1987'), 2010, 'androiddev'),
 ]
 
 function renderTable(arrStudents) {
-  
 
+    arrStudents.forEach(element => {
+
+        console.log(element);
+
+        let $liForTable = document.createElement('li')
+        let $tableName = document.createElement('span')
+        let $tableAge = document.createElement('span')
+        let $tableFaculty = document.createElement('span')
+        let $tableEducation = document.createElement('span')
+
+        $tableName.textContent = element.fullname
+        $tableAge.textContent = element.age
+        $tableFaculty.textContent = element._facult
+        $tableEducation.textContent = element._study
+
+        $liForTable.classList.add('table-li')
+        $tableName.classList.add('sorting__btn-1')
+        $tableAge.classList.add('sorting__btn-2')
+        $tableFaculty.classList.add('sorting__btn-3')
+        $tableEducation.classList.add('sorting__btn-4')
+
+        $liForTable.append($tableName)
+        $liForTable.append($tableAge)
+        $liForTable.append($tableFaculty)
+        $liForTable.append($tableEducation)
+        $table.append($liForTable)
+    });
 }
+renderTable(studentsList)
 
 document.getElementById('form').addEventListener('submit', (event) => {
-  event.preventDefault();
-  let $objStudents = {};
+    event.preventDefault();
+    console.log(Number(document.getElementById('st-stady').value.trim()));
 
-  $objStudents.name = (document.getElementById('st-name')).value
-  $objStudents.surname = (document.getElementById('st-surname')).value
-  $objStudents.birth = (document.getElementById('st-dob')).value
-  $objStudents.study = (document.getElementById('st-stady')).value
-  $objStudents.facult = (document.getElementById('st-faculty')).value
+    let copyStList = [...studentsList]
 
-  console.log($objStudents);
+    copyStList.push(new Student(
+        document.getElementById('st-name').value.trim(),
+        (document.getElementById('st-surname').value).trim(),
+        new Date(document.getElementById('st-dob').value),
+        (document.getElementById('st-faculty').value).trim(),
+        Number(document.getElementById('st-stady').value.trim()),
+    ))
+    studentsList = [...copyStList]
 
 })
+// console.log(studentsList[studentsList.length - 1].age);
