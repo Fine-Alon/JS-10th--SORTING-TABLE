@@ -35,7 +35,7 @@ function renderTable(arrStudents) {
         $tableName.textContent = element.fullname
         $tableAge.textContent = element.age
         $tableFaculty.textContent = element._facult
-        $tableEducation.textContent = element._study
+        $tableEducation.textContent = element.education
 
         $liForTable.classList.add('table-li')
         $tableName.classList.add('sorting__btn-1')
@@ -67,7 +67,8 @@ document.getElementById('form').addEventListener('submit', (event) => {
 })
 // console.log(studentsList[studentsList.length - 1].age);
 
-// This func check if 4/4 parametrs(Filtr Inputs) are True
+
+// This func check if 4/4 parametrs(Filter Inputs) are True
 // initially all of them are True => cose we have no specific filters
 function filterStudentTable(name, facult, startEduc, endEduc) {
 
@@ -101,7 +102,6 @@ filterInputs.forEach(input => {
         const filterFinish = document.getElementById('filter-finish-ed').value
 
         renderTable(filterStudentTable(filterName, filterFacult, filterStart, filterFinish))
-
     })
 });
 
