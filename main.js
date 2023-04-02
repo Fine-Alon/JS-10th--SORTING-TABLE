@@ -1,6 +1,5 @@
 import Student from "./student.js";
 
-
 const studentsList = [
     new Student('Michail', 'Babojko', new Date('1995,04,02'), 2010, 'godofprogramming'),
     new Student('Alexandr', 'Dudukalo', new Date('March 30, 1994'), 2011, 'curator'),
@@ -14,8 +13,12 @@ const studentsList = [
 // important global variables
 let $table = document.getElementById('table'),
     copyStList = [...studentsList],
-    $filterForm = document.getElementById('filterForm')
-
+    $filterForm = document.getElementById('filterForm'),
+    sortVector = true,
+    $nameBtnSort = document.getElementById('sorting-name'),
+    $ageBtnSort = document.getElementById('sorting-birth'),
+    $facultyBtnSort = document.getElementById('sorting-faculty'),
+    $educationBtnSort = document.getElementById('sorting-start-ed')
 
 
 // rendering of new Student to table
@@ -91,6 +94,7 @@ function filterStudentTable(name, facult, startEduc, endEduc) {
 // here we check every symbol that was input to Filter-Form
 // and send them to 'filterStudentTable(..,..,..,..)'
 // which filters out unnecessary
+
 let filterInputs = $filterForm.querySelectorAll('input')
 filterInputs.forEach(input => {
 
@@ -105,3 +109,33 @@ filterInputs.forEach(input => {
     })
 });
 
+// this block of code responeble for sorting Table by clicking on Buttons
+// at the top of the Table
+function sortStudentTable(arr, prop, vector) {
+
+    return arr.sort((a, b) => {
+
+        if (vector ? a[prop] < b[prop] : a[prop] > b[prop]) { return -1 }
+
+    })
+}
+// here are Buttons with their each with it's property like - 'fullname','_facult'
+// Property will go to an argument of function sortStudentTable(..,..,..,..)
+// Property will be getting from (getter & attributs) of (class Student)
+
+$nameBtnSort.addEventListener('click', () => {
+    renderTable(sortStudentTable(copyStList, 'fullname', sortVector))
+    sortVector = !sortVector
+})
+$ageBtnSort.addEventListener('click', () => {
+    renderTable(sortStudentTable(copyStList, 'age', sortVector))
+    sortVector = !sortVector
+})
+$facultyBtnSort.addEventListener('click', () => {
+    renderTable(sortStudentTable(copyStList, '_facult', sortVector))
+    sortVector = !sortVector
+})
+$educationBtnSort.addEventListener('click', () => {
+    renderTable(sortStudentTable(copyStList, '_study', sortVector))
+    sortVector = !sortVector
+})
