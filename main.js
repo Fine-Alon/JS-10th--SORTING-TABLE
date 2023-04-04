@@ -68,14 +68,14 @@ document.getElementById('form').addEventListener('submit', (event) => {
     ))
     renderTable(copyStList)
 })
-// console.log(studentsList[studentsList.length - 1].age);
 
 
 // This func check if 4/4 parametrs(Filter Inputs) are True
 // initially all of them are True => cose we have no specific filters
 function filterStudentTable(name, facult, startEduc, endEduc) {
+    let fiteredArray = [...copyStList]
 
-    return copyStList.filter(student => {
+    return fiteredArray.filter(student => {
 
         let nameMatch = student.fullname.toLowerCase()
         let facultMatch = student._facult.toLowerCase()
@@ -89,12 +89,12 @@ function filterStudentTable(name, facult, startEduc, endEduc) {
 
         return nameMatch && facultMatch && startMatch && endMatch
     })
+
 }
 
 // here we check every symbol that was input to Filter-Form
 // and send them to 'filterStudentTable(..,..,..,..)'
 // which filters out unnecessary
-
 let filterInputs = $filterForm.querySelectorAll('input')
 filterInputs.forEach(input => {
 
@@ -119,10 +119,10 @@ function sortStudentTable(arr, prop, vector) {
 
     })
 }
+
 // here are Buttons with their each with it's property like - 'fullname','_facult'
 // Property will go to an argument of function sortStudentTable(..,..,..,..)
 // Property will be getting from (getter & attributs) of (class Student)
-
 $nameBtnSort.addEventListener('click', () => {
     renderTable(sortStudentTable(copyStList, 'fullname', sortVector))
     sortVector = !sortVector
