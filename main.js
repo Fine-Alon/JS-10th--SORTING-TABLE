@@ -15,10 +15,16 @@ let $table = document.getElementById('table'),
     copyStList = [...studentsList],
     $filterForm = document.getElementById('filterForm'),
     sortVector = true,
+    sortProp = 'fullname',
     $nameBtnSort = document.getElementById('sorting-name'),
     $ageBtnSort = document.getElementById('sorting-birth'),
     $facultyBtnSort = document.getElementById('sorting-faculty'),
-    $educationBtnSort = document.getElementById('sorting-start-ed')
+    $educationBtnSort = document.getElementById('sorting-start-ed'),
+    filterInputs = $filterForm.querySelectorAll('input'),
+    $filterName = '',
+    $filterFacult = '',
+    $filterStart = '',
+    $filterFinish = ''
 
 
 // rendering of new Student to table
@@ -27,6 +33,12 @@ function renderTable(arrStudents) {
     document.querySelectorAll('.table-li').forEach(element => {
         element.remove()
     });
+
+    // filter the arr by global var's (inputs values)
+    arrStudents = filterStudentTable(arrStudents)
+
+    // sort this filtered arr
+    arrStudents = sortStudentTable(arrStudents, sortProp, sortVector)
 
     arrStudents.forEach(element => {
         let $liForTable = document.createElement('li')
@@ -72,8 +84,8 @@ document.getElementById('form').addEventListener('submit', (event) => {
 
 // This func check if 4/4 parametrs(Filter Inputs) are True
 // initially all of them are True => cose we have no specific filters
-function filterStudentTable(name, facult, startEduc, endEduc) {
-    let fiteredArray = [...copyStList]
+function filterStudentTable(arr) {
+    let fiteredArray = [...arr]
 
     return fiteredArray.filter(student => {
 
@@ -82,30 +94,29 @@ function filterStudentTable(name, facult, startEduc, endEduc) {
         let startMatch = student._study
         let endMatch = student.finishEducation
 
-        nameMatch = name ? nameMatch.includes(name.toLowerCase()) : true
-        facultMatch = facult ? facultMatch.includes(facult.toLowerCase()) : true
-        startMatch = startEduc ? startMatch >= startEduc : true
-        endMatch = endEduc ? endMatch <= endEduc : true
+        $filterName = document.getElementById('filter-name').value
+        $filterFacult = document.getElementById('filter-faculty').value
+        $filterStart = document.getElementById('filter-start-ed').value
+        $filterFinish = document.getElementById('filter-finish-ed').value
+
+        nameMatch = $filterName ? nameMatch.includes($filterName.toLowerCase()) : true
+        facultMatch = $filterFacult ? facultMatch.includes($filterFacult.toLowerCase()) : true
+        startMatch = $filterStart ? startMatch >= $filterStart : true
+        endMatch = $filterFinish ? endMatch <= $filterFinish : true
 
         return nameMatch && facultMatch && startMatch && endMatch
     })
-
 }
 
 // here we check every symbol that was input to Filter-Form
 // and send them to 'filterStudentTable(..,..,..,..)'
 // which filters out unnecessary
-let filterInputs = $filterForm.querySelectorAll('input')
 filterInputs.forEach(input => {
 
     input.addEventListener('input', () => {
 
-        const filterName = document.getElementById('filter-name').value
-        const filterFacult = document.getElementById('filter-faculty').value
-        const filterStart = document.getElementById('filter-start-ed').value
-        const filterFinish = document.getElementById('filter-finish-ed').value
-
-        renderTable(filterStudentTable(filterName, filterFacult, filterStart, filterFinish))
+        // here we render table after every input(filter field)
+        renderTable(copyStList)
     })
 });
 
@@ -124,18 +135,22 @@ function sortStudentTable(arr, prop, vector) {
 // Property will go to an argument of function sortStudentTable(..,..,..,..)
 // Property will be getting from (getter & attributs) of (class Student)
 $nameBtnSort.addEventListener('click', () => {
-    renderTable(sortStudentTable(copyStList, 'fullname', sortVector))
     sortVector = !sortVector
+    sortProp = 'fullname'
+    renderTable(copyStList)
 })
 $ageBtnSort.addEventListener('click', () => {
-    renderTable(sortStudentTable(copyStList, 'age', sortVector))
     sortVector = !sortVector
+    sortProp = 'age'
+    renderTable(copyStList)
 })
 $facultyBtnSort.addEventListener('click', () => {
-    renderTable(sortStudentTable(copyStList, '_facult', sortVector))
     sortVector = !sortVector
+    sortProp = '_facult'
+    renderTable(copyStList)
 })
 $educationBtnSort.addEventListener('click', () => {
-    renderTable(sortStudentTable(copyStList, '_study', sortVector))
     sortVector = !sortVector
+    sortProp = '_study'
+    renderTable(copyStList)
 })
