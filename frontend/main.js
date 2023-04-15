@@ -27,6 +27,32 @@ let $table = document.getElementById('table'),
     $filterFinish = ''
 
 
+function $assebleDOMStudentEl(instanceStudent) {
+    let $liForTable = document.createElement('li')
+    let $tableName = document.createElement('span')
+    let $tableAge = document.createElement('span')
+    let $tableFaculty = document.createElement('span')
+    let $tableEducation = document.createElement('span')
+
+    $tableName.textContent = instanceStudent.fullname
+    $tableAge.textContent = instanceStudent.age
+    $tableFaculty.textContent = instanceStudent._facult
+    $tableEducation.textContent = instanceStudent.education
+
+    $liForTable.classList.add('table-li')
+    $tableName.classList.add('sorting__btn-1')
+    $tableAge.classList.add('sorting__btn-2')
+    $tableFaculty.classList.add('sorting__btn-3')
+    $tableEducation.classList.add('sorting__btn-4')
+
+    $liForTable.append($tableName)
+    $liForTable.append($tableAge)
+    $liForTable.append($tableFaculty)
+    $liForTable.append($tableEducation)
+
+    return $liForTable
+}
+
 // rendering of new Student to table
 function renderTable(arrStudents) {
 
@@ -41,28 +67,9 @@ function renderTable(arrStudents) {
     arrStudents = sortStudentTable(arrStudents, sortProp, sortVector)
 
     arrStudents.forEach(element => {
-        let $liForTable = document.createElement('li')
-        let $tableName = document.createElement('span')
-        let $tableAge = document.createElement('span')
-        let $tableFaculty = document.createElement('span')
-        let $tableEducation = document.createElement('span')
+        let $studentDOM = $assebleDOMStudentEl(element)
 
-        $tableName.textContent = element.fullname
-        $tableAge.textContent = element.age
-        $tableFaculty.textContent = element._facult
-        $tableEducation.textContent = element.education
-
-        $liForTable.classList.add('table-li')
-        $tableName.classList.add('sorting__btn-1')
-        $tableAge.classList.add('sorting__btn-2')
-        $tableFaculty.classList.add('sorting__btn-3')
-        $tableEducation.classList.add('sorting__btn-4')
-
-        $liForTable.append($tableName)
-        $liForTable.append($tableAge)
-        $liForTable.append($tableFaculty)
-        $liForTable.append($tableEducation)
-        $table.append($liForTable)
+        $table.append($studentDOM)
     });
 }
 renderTable(studentsList)
