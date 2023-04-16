@@ -1,13 +1,15 @@
 import Student from "./student.js";
 
+const SERVER_URL = 'http://localhost:3001'
+
 const studentsList = [
-    new Student('Michail', 'Babojko', new Date('1995,04,02'), 2010, 'godofprogramming'),
-    new Student('Alexandr', 'Dudukalo', new Date('March 30, 1994'), 2011, 'curator'),
-    new Student('Alon', 'Fine', new Date('June 20, 1997'), 2019, 'fullstack'),
-    new Student('Judit', 'Fine', new Date('September 10, 2005'), 2023, 'rocketsince'),
-    new Student('Ron', 'Green', new Date('January 20, 1992'), 2022, 'iosdev'),
-    new Student('Glen', 'Stark', new Date('November 20, 1991'), 2015, 'disainer'),
-    new Student('Rick', 'Briens', new Date('July 20, 1987'), 2010, 'androiddev'),
+    // new Student('Michail', 'Babojko', new Date('1995,04,02'), 2010, 'godofprogramming'),
+    // new Student('Alexandr', 'Dudukalo', new Date('March 30, 1994'), 2011, 'curator'),
+    // new Student('Alon', 'Fine', new Date('June 20, 1997'), 2019, 'fullstack'),
+    // new Student('Judit', 'Fine', new Date('September 10, 2005'), 2023, 'rocketsince'),
+    // new Student('Ron', 'Green', new Date('January 20, 1992'), 2022, 'iosdev'),
+    // new Student('Glen', 'Stark', new Date('November 20, 1991'), 2015, 'disainer'),
+    // new Student('Rick', 'Briens', new Date('July 20, 1987'), 2010, 'androiddev'),
 ]
 
 // important global variables
@@ -24,8 +26,39 @@ let $table = document.getElementById('table'),
     $filterName = '',
     $filterFacult = '',
     $filterStart = '',
-    $filterFinish = ''
+    $filterFinish = '',
+    checkServerArr = await getObjFromServer()
 
+async function getObjFromServer() {
+
+    const response = await fetch(SERVER_URL + '/api/students', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+    })
+
+    const data = await response.json()
+
+    return data
+}
+
+async function addObjToServer(instanceStudent) {
+    let response = await fetch(SERVER_URL + '/api/students', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            name: instanceStudent._name,
+            surname: instanceStudent._surname,
+            lastname: instanceStudent._name,
+            birthday: instanceStudent._birth,
+            studyStart: instanceStudent._study,
+            faculty: instanceStudent._faculty
+        })
+    })
+
+    let data = await response.json()
+
+    return data
+}
 
 function $assebleDOMStudentEl(instanceStudent) {
     let $liForTable = document.createElement('li')
@@ -36,7 +69,7 @@ function $assebleDOMStudentEl(instanceStudent) {
 
     $tableName.textContent = instanceStudent.fullname
     $tableAge.textContent = instanceStudent.age
-    $tableFaculty.textContent = instanceStudent._facult
+    $tableFaculty.textContent = instanceStudent._faculty
     $tableEducation.textContent = instanceStudent.education
 
     $liForTable.classList.add('table-li')
@@ -72,19 +105,40 @@ function renderTable(arrStudents) {
         $table.append($studentDOM)
     });
 }
-renderTable(studentsList)
+
+if (checkServerArr) {
+    for (const objStudent of checkServerArr) {
+
+        copyStList.push(new Student(
+
+            objStudent.name,
+            objStudent.surname,
+            objStudent.lastname,
+            objStudent.birthday,
+            objStudent.studyStart,
+            objStudent.faculty,
+            objStudent.id
+        ))
+    }
+}
+
+renderTable(copyStList)
 
 // add new Student to (Copy of main Arr) then (Render table)
 document.getElementById('form').addEventListener('submit', (event) => {
     event.preventDefault();
 
-    copyStList.push(new Student(
+    let newStudent = new Student(
         document.getElementById('st-name').value.trim(),
         (document.getElementById('st-surname').value).trim(),
         new Date(document.getElementById('st-dob').value),
         Number(document.getElementById('st-stady').value.trim()),
         (document.getElementById('st-faculty').value).trim(),
-    ))
+    )
+
+    addObjToServer(newStudent)
+
+    copyStList.push(newStudent)
     renderTable(copyStList)
 })
 
@@ -97,7 +151,7 @@ function filterStudentTable(arr) {
     return fiteredArray.filter(student => {
 
         let nameMatch = student.fullname.toLowerCase()
-        let facultMatch = student._facult.toLowerCase()
+        let facultMatch = student._faculty.toLowerCase()
         let startMatch = student._study
         let endMatch = student.finishEducation
 
@@ -138,7 +192,7 @@ function sortStudentTable(arr, prop, vector) {
     })
 }
 
-// here are Buttons with their each with it's property like - 'fullname','_facult'
+// here are Buttons with their each with it's property like - 'fullname','_faculty'
 // Property will go to an argument of function sortStudentTable(..,..,..,..)
 // Property will be getting from (getter & attributs) of (class Student)
 $nameBtnSort.addEventListener('click', () => {
@@ -153,7 +207,7 @@ $ageBtnSort.addEventListener('click', () => {
 })
 $facultyBtnSort.addEventListener('click', () => {
     sortVector = !sortVector
-    sortProp = '_facult'
+    sortProp = '_faculty'
     renderTable(copyStList)
 })
 $educationBtnSort.addEventListener('click', () => {

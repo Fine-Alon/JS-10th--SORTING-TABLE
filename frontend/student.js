@@ -1,12 +1,14 @@
 export default
     class Student {
 
-    constructor(name = 'name', surname = 'surname', birth = null, study = 'study', facult = 'facult') {
+    constructor(name = 'name', surname = 'surname', lastname = 'lastname', birth = null, study = 'study', faculty = 'facult', id = null) {
         this._name = name
         this._surname = surname
+        this._lastname = lastname
         this._birth = birth
-        this._facult = facult
+        this._faculty = faculty
         this._study = study
+        this._id = id
     }
 
     get fullname() {
