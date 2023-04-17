@@ -24,7 +24,7 @@ const SERVER_URL = 'http://localhost:3001';
 // =======================  finish  adding Students  ========================
 
 
-let studentsList = [new Student('Александр', 'Иванов', new Date('1993,05,22'), 2021, 'Экономика')];
+let studentsList = [new Student('Александр', 'Иванов','Александр', new Date('1993,05,22'), 2021, 'Экономика')];
 
 // important global variables
 let $table = document.getElementById('table'),
