@@ -100,7 +100,7 @@ async function deleteAllStudentsFromServer() {
     }
 }
 
-// this function will work if HTML form won't use browser validation initial settings
+// this function will work if HTML form won't use initial browser validation settings
 function validation(form) {
 
     let ifValid = true
